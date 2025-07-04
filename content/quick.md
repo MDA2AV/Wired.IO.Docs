@@ -1,5 +1,5 @@
 ---
-title: ⚡ Zap!!
+title: ⚡ Let's get you wired up!
 type: quick
 ---
 
@@ -52,7 +52,7 @@ var app = builder
             .Status(ResponseStatus.Ok)
             .Type("application/json")
             .Content(new JsonContent(
-                new { Name = "Alice", Age = 30 }, 
+                new { Name = "Toni", Age = 18 }, 
                 JsonSerializerOptions.Default));
     })
     .Build();
