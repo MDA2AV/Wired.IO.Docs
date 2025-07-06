@@ -21,24 +21,35 @@ menu:
     - name: Docs
       pageRef: /docs
       weight: 1
-    - name: Search
-      weight: 4
+    - name: Discord
+      weight: 5
+      url: "https://discord.gg/d8EmAVsp"
       params:
-        type: search
+        icon: discord
     - name: GitHub
       weight: 5
       url: "https://github.com/MDA2AV/Wired.IO"
       params:
         icon: github
+    - name: Search
+      weight: 6
+      params:
+        type: search
 
 params:
   navbar:
     displayTitle: true
-    displayLogo: false
+    displayLogo: true
+    logo:
+      path: images/logo.png
+      dark: images/logo.png
+      link: /
+      width: 50
+      height: 50
 
   footer:
     displayCopyright: false
-    displayPoweredBy: true
+    displayPoweredBy: false
 
   editURL:
     enable: true

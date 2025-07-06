@@ -7,7 +7,7 @@ sidebar:
 
 Wired.IO supports dependency injection across the entire framework.
 
-#### Registering a service
+### Registering a service
 
 Register @ Wired.IO internal IHostBuilder (HostBuilder)
 
@@ -129,3 +129,10 @@ public class ContextHandlerExample(DependencyService service) : IContextHandler<
 ```
 {{< /tab >}}
 {{< /tabs >}}
+
+
+### Resolving dependencies for Middleware and IPipelineBehaviors
+
+For Middleware, resolve directly from scope, see *3. Adding Middleware* chapter.
+
+For IPipelineBehaviors, resolve directly from constructor or context.scope.
