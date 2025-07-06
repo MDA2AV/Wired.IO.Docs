@@ -4,14 +4,12 @@ toc: false
 ---
 <br/>
 
-![My image description](wired.png)
-
-## Get Started
-
 {{< cards >}}
   {{< card link="docs" title="Docs" icon="book-open" >}}
   {{< card link="quick" title="Quick Start" icon="user" >}}
 {{< /cards >}}
+
+![My image description](neo.webp)
 
 **Wired.IO** is a lightweight, embeddable HTTP server for .NET — built as a minimal alternative to Kestrel. It runs on .NET 8+ and is ideal for low-overhead applications where performance, control, and customizability matter.
 

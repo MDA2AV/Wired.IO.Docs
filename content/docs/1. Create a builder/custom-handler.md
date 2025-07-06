@@ -1,7 +1,6 @@
 ---
 title: 1.2 Custom Handler
 type: docs
-next: 2. Create an Endpoint
 ---
 
 You can roll your own IHttpHandler and injecting it when creating the builder.
@@ -44,3 +43,78 @@ public interface IHttpHandler<out TContext>
 
 
 #### Custom handler pseudo example
+
+```csharp
+public class CustomContext : IContext
+{
+    // Implement your custom IContext..
+}
+
+public class CustomRequest : IRequest
+{
+    // Implement your custom IRequest..
+}
+
+public class CustomResponse : IResponse
+{
+    // Implement your custom IResponse..
+}
+
+public class CustomHttpHandler<TContext> : IHttpHandler<TContext>
+    where TContext : class, IContext, new()
+{
+    // Pool context objects for less memory pressure (optional)
+    private static readonly ObjectPool<TContext> ContextPool =
+        new DefaultObjectPool<TContext>(new DefaultPooledObjectPolicy<TContext>(), 8192);
+
+    public async Task HandleClientAsync(Stream stream, Func<TContext, Task> pipeline, CancellationToken stoppingToken)
+    {
+        // Get a context object from pool (or create a new instance if not pooling)
+        var context = ContextPool.Get();
+
+        // Create a new IHttpRequest or use pooling
+        context.Request = new CustomRequest();
+
+        // Set up the PipeReader and PipeWriter for the context.
+        // You can also skip this and use the Stream directly to read and write from socket.
+        // However, the preferred way is to use PipeReader and PipeWriter for better performance.
+        // Also, if you decide to use Stream, you will need to cast the IContext passed to the endpoint
+        // since IContext does not expose the Stream directly.
+        context.Reader = PipeReader.Create(stream,
+            new StreamPipeReaderOptions(MemoryPool<byte>.Shared, leaveOpen: true, bufferSize: 8192));
+
+        context.Writer = PipeWriter.Create(stream,
+            new StreamPipeWriterOptions(MemoryPool<byte>.Shared, leaveOpen: true));
+
+
+
+        // The next section is typically wrapped in a loop or equivalent if the connection is persistent (keep-alive).
+
+        // Read the received request headers and set the context's HttpMethod and Route
+
+        // Call the pipeline callback, it will trigger the middleware pipeline and the endpoint
+
+        // Handle Keep-Alive connections
+
+        // Make sure to dispose managed resources and return the context to the pool
+
+
+    }
+}
+```
+
+#### Injecting the custom handler in the builder
+
+Use the handler factory overload to pass the custom handler construction delegate to the CreateBuilder method.
+
+```csharp
+var builder = App.CreateBuilder<CustomHttpHandler<CustomContext>, CustomContext>(() => 
+    new CustomHttpHandler<CustomContext>());
+```
+
+Optionally, also pass the accepted SslAplicationProtocols
+
+```csharp
+var builder = App.CreateBuilder<CustomHttpHandler<CustomContext>, CustomContext>(() =>
+    new CustomHttpHandler<CustomContext>(), [SslApplicationProtocol.Http11]);
+```

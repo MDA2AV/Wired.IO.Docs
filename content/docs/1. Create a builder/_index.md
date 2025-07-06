@@ -1,9 +1,8 @@
 ---
 title: 1. Create a Builder
 type: docs
-next: docs/2. Create an Endpoint
 sidebar:
-  open: true
+  open: false
 ---
 
 
