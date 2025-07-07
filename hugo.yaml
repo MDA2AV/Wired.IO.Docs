@@ -37,6 +37,7 @@ menu:
         type: search
 
 params:
+  defaultColorMode: dark
   navbar:
     displayTitle: true
     displayLogo: true

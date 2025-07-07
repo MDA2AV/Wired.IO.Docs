@@ -61,6 +61,7 @@ In many scenarios IContext is not practical to own the wired events such as when
 
 This is specifically useful when working with transactions such as is database access where the database models are entities that cannot inject dependencies in their constructors.
 
+#### Create the wired event, handler and the class that will own the wired events
 ```csharp
 // Create a IWiredEvent
 public class ExampleWiredEvent(string description) : IWiredEvent
@@ -98,7 +99,10 @@ public class Entity : IHasWiredEvents
         AddWiredEvent(wiredEvent);
     }
 }
+```
 
+#### Register the wired event handler
+```csharp
 ( ... )
 // Register the IWiredEventHandler in the IoC container
 builder.App.HostBuilder
@@ -110,6 +114,99 @@ builder.App.HostBuilder
             ( ... )
     });
 ( ... )
-
-
 ```
+
+#### At the endpoint..
+
+{{< tabs items="Fast Endpoints,Hybrid Endpoints,Mediator Endpoints" >}}
+
+{{< tab >}}
+
+```csharp
+// Create Entity and manually dispatch the wired events 
+builder
+    // dispatchContextWiredEvents can be set as false 
+    // if context wired events are not being used
+    .AddWiredEvents(dispatchContextWiredEvents: false)
+    .MapGet("/wired-event", scope => async httpContext =>
+    {
+        var entity = new Entity();
+        entity.DoSomething();
+
+        // Handle response here..
+
+        // Dispatch wired events, this can be wrapped 
+        // in a unit of work pattern or outbox pattern
+        var wiredEventDispatcher = scope
+            .GetRequiredService<Func<IEnumerable<IWiredEvent>, Task>>();
+        await wiredEventDispatcher(entity.WiredEvents);
+        entity.ClearWiredEvents();
+    })
+```
+{{< /tab >}}
+
+{{< tab >}}
+```csharp
+public class RequestHandlerExample(Func<IEnumerable<IWiredEvent>, Task> wiredEventDispatcher) 
+    : IRequestHandler<RequestQuery, RequestResult>
+{
+    public async Task<RequestResult> Handle(RequestQuery request, CancellationToken cancellationToken)
+    {
+        var entity = new Entity();
+        entity.DoSomething();
+
+        await wiredEventDispatcher(entity.WiredEvents);
+        entity.ClearWiredEvents();
+
+        return new RequestResult("Toni", "Mars");
+    }
+}
+public record RequestQuery() : IRequest<RequestResult>;
+
+public record RequestResult(string Name, string Address);
+
+( ... )
+builder
+    .AddWiredEvents(dispatchContextWiredEvents: false)
+    .MapGet("/wired-event-handler", scope => async context =>
+    {
+        var requestHandler = scope.GetRequiredService<IRequestDispatcher<Http11Context>>();
+        var result = await requestHandler.Send(new RequestQuery(), context.CancellationToken);
+
+        context
+            .Respond()
+            .Status(ResponseStatus.Ok)
+            .Type("application/json")
+            .Content(new JsonContent(result, JsonSerializerOptions.Default));
+    })
+( ... )
+```
+{{< /tab >}}
+
+{{< tab >}}
+```csharp
+// The most elegant solution
+[Route("GET", "/wired-event-handler")]
+public class ContextHandlerExample(Func<IEnumerable<IWiredEvent>, Task> wiredEventDispatcher) 
+    : IContextHandler<Http11Context>
+{
+    public async Task Handle(Http11Context context, CancellationToken cancellationToken)
+    {
+        var entity = new Entity();
+        entity.DoSomething();
+
+        await wiredEventDispatcher(entity.WiredEvents);
+        entity.ClearWiredEvents();
+
+        context
+            .Respond()
+            .Status(ResponseStatus.Ok)
+            .Type("application/json")
+            .Content(new JsonContent(new { Name = "Toni", Address = "Mars" },
+                JsonSerializerOptions.Default));
+    }
+}
+```
+{{< /tab >}}
+
+{{< /tabs >}}
