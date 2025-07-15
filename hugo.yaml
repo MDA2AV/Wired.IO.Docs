@@ -23,7 +23,7 @@ menu:
       weight: 1
     - name: Discord
       weight: 5
-      url: "https://discord.gg/d8EmAVsp"
+      url: "https://discord.gg/psxPcgZBF6"
       params:
         icon: discord
     - name: GitHub
@@ -51,7 +51,3 @@ params:
   footer:
     displayCopyright: false
     displayPoweredBy: false
-
-  editURL:
-    enable: true
-    base: "https://github.com/imfing/hextra-starter-template/edit/main/content"

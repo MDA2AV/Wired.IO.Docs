@@ -5,12 +5,28 @@ sidebar:
   open: false
 ---
 
-Wired.IO implements ILogger (Microsoft.Extensions.Logging), logging options are configurable through the builder.
+Wired.IO implements ILoggingFactory with its default parameters
+
+```csharp
+    private static void DefaultLoggingBuilder(ILoggingBuilder loggingBuilder)
+    {
+        loggingBuilder
+            .ClearProviders()
+#if DEBUG
+            .SetMinimumLevel(LogLevel.Debug)
+#else
+            .SetMinimumLevel(LogLevel.Information)
+#endif
+            .AddConsole();
+    }
+```
+
+If you want to override this ILoggingFactory, register yours with your logging builder configuration (Microsoft.Extensions.Logging).
 
 ```csharp
 ( ... )
-builder.App.HostBuilder
-    .ConfigureLogging(logging =>
+builder.Services
+    .AddLogging(loggingBuilder =>
     {
         // Configure ILoggingBuilder
     })

@@ -19,7 +19,7 @@ No middlewares, directly respond to the socket's NetworkStream using PipeWriter.
 using Wired.IO.App;
 using Wired.IO.Http11.Context;
 
-var builder = App.CreateBuilder(); // Create a default builder, assumes HTTP/1.1
+var builder = WiredApp.CreateBuilder(); // Create a default builder, assumes HTTP/1.1
 
 var app = builder
     .Port(5000) // Configured to http://localhost:5000
@@ -41,7 +41,7 @@ using Wired.IO.App;
 using Wired.IO.Http11.Response.Content;
 using Wired.IO.Protocol.Response;
 
-var builder = App.CreateBuilder(); // Create a default builder, assumes HTTP/1.1
+var builder = WiredApp.CreateBuilder(); // Create a default builder, assumes HTTP/1.1
 
 var app = builder
     .Port(5000) // Configured to http://localhost:5000
@@ -73,19 +73,15 @@ using Wired.IO.App;
 using Wired.IO.Http11.Response.Content;
 using Wired.IO.Protocol.Response;
 
-var builder = App.CreateBuilder(); // Create a default builder, assumes HTTP/1.1
+var builder = WiredApp.CreateBuilder(); // Create a default builder, assumes HTTP/1.1
 
-builder.App.HostBuilder
-    .ConfigureLogging(logging =>
-    {
-        logging.ClearProviders();
-        logging.AddConsole();
-        logging.SetMinimumLevel(LogLevel.Information); // Set the minimum log level
+builder.Services
+    .AddLogging(loggingBuilder => {
+        loggingBuilder.ClearProviders();
+        loggingBuilder.AddConsole();
+        loggingBuilder.SetMinimumLevel(LogLevel.Information); // Set the minimum log level
     })
-    .ConfigureServices((_, services) =>
-    {
-        services.AddScoped<DependencyService>();
-    });
+    .AddScoped<DependencyService>();
 
 var app = builder
     .Port(5000) // Configured to http://localhost:5000

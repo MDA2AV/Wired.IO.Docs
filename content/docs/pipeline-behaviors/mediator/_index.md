@@ -11,11 +11,7 @@ For mediator endpoints, the framework already resolves the IRequestDispatcher
 
 ```csharp
 // Register the IPipelineBehavior<>
-builder.App.HostBuilder
-    .ConfigureServices((_, services) =>
-    {
-        services.AddScoped(typeof(IPipelineBehavior<>), typeof(ExampleBehavior<>));
-    });
+builder.Services.AddScoped(typeof(IPipelineBehavior<>), typeof(ExampleBehavior<>));
 
 ( ... )
 
@@ -57,11 +53,7 @@ or define TContext if known, this can also be taken advantage to filter behavior
 
 ```csharp
 // Register the IPipelineBehavior<>
-builder.App.HostBuilder
-    .ConfigureServices((_, services) =>
-    {
-        services.AddScoped(typeof(IPipelineBehavior<Http11Context>), typeof(ExampleBehavior));
-    });
+builder.Services.AddScoped(typeof(IPipelineBehavior<Http11Context>), typeof(ExampleBehavior));
 
 ( ... )
 

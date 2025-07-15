@@ -108,13 +108,13 @@ public class CustomHttpHandler<TContext> : IHttpHandler<TContext>
 Use the handler factory overload to pass the custom handler construction delegate to the CreateBuilder method.
 
 ```csharp
-var builder = App.CreateBuilder<CustomHttpHandler<CustomContext>, CustomContext>(() => 
+var builder = WiredApp.CreateBuilder<CustomHttpHandler<CustomContext>, CustomContext>(() => 
     new CustomHttpHandler<CustomContext>());
 ```
 
 Optionally, also pass the accepted SslAplicationProtocols
 
 ```csharp
-var builder = App.CreateBuilder<CustomHttpHandler<CustomContext>, CustomContext>(() =>
+var builder = WiredApp.CreateBuilder<CustomHttpHandler<CustomContext>, CustomContext>(() =>
     new CustomHttpHandler<CustomContext>(), [SslApplicationProtocol.Http11]);
 ```

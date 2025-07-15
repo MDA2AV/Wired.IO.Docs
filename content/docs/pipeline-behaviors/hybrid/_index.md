@@ -10,30 +10,26 @@ sidebar:
 In hybrid endpoints resolve IRequestDispatcher instead of IRequestHandler.
 
 ```csharp
-// Register the IPipelineBehavior<,>
-builder.App.HostBuilder
-    .ConfigureServices((_, services) =>
-    {
-        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ExampleBehavior<,>));
-    });
-
 ( ... )
-.MapGet("/hybrid-endpoint", scope => async context =>
-{
-    // Does not execute behaviors
-    //var requestHandler = scope.GetRequiredService<IRequestHandler<RequestQuery, RequestResult>>();
-    //var result = await requestHandler.Handle(new RequestQuery(), context.CancellationToken);
+builder.Services
+    // Register the IPipelineBehavior<,>
+    .AddScoped(typeof(IPipelineBehavior<,>), typeof(ExampleBehavior<,>))
+    .MapGet("/hybrid-endpoint", scope => async context =>
+    {
+        // Does not execute behaviors
+        //var requestHandler = scope.GetRequiredService<IRequestHandler<RequestQuery, RequestResult>>();
+        //var result = await requestHandler.Handle(new RequestQuery(), context.CancellationToken);
 
-    // Executes behaviors
-    var dispatcher = scope.GetRequiredService<IRequestDispatcher<Http11Context>>(); // Use the corresponding IContext
-    var result = await dispatcher.Send(new RequestQuery());
+        // Executes behaviors
+        var dispatcher = scope.GetRequiredService<IRequestDispatcher<Http11Context>>(); // Use the corresponding IContext
+        var result = await dispatcher.Send(new RequestQuery());
 
-    context
-        .Respond()
-        .Status(ResponseStatus.Ok)
-        .Type("application/json")
-        .Content(new JsonContent(result, JsonSerializerOptions.Default));
-})
+        context
+            .Respond()
+            .Status(ResponseStatus.Ok)
+            .Type("application/json")
+            .Content(new JsonContent(result, JsonSerializerOptions.Default));
+    })
 ( ... )
 
 // Define the IPipelineBehavior<TRequest, TResponse>
@@ -57,22 +53,18 @@ public class ExampleBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
 IPipelineBehavior also supports void response just like IRequestHandler
 
 ```csharp
-builder.ConfigureServices((_, services) =>
-{
-    services
-        .AddScoped(typeof(IPipelineBehaviorNoResponse<>), typeof(ExampleBehavior<>))
-});
-
 ( ... )
-.MapGet("/hybrid-endpoint", scope => async context =>
-{
-    var dispatcher = scope.GetRequiredService<IRequestDispatcher<Http11Context>>();
-    await dispatcher.Send(new RequestQuery(), context.CancellationToken);
+builder.Services
+    .AddScoped(typeof(IPipelineBehaviorNoResponse<>), typeof(ExampleBehavior<>))
+    .MapGet("/hybrid-endpoint", scope => async context =>
+    {
+        var dispatcher = scope.GetRequiredService<IRequestDispatcher<Http11Context>>();
+        await dispatcher.Send(new RequestQuery(), context.CancellationToken);
 
-    context
-        .Respond()
-        .Status(ResponseStatus.Ok);
-})
+        context
+            .Respond()
+            .Status(ResponseStatus.Ok);
+    })
 ( ... )
 
 public class ExampleBehavior<TRequest> : IPipelineBehaviorNoResponse<TRequest>
@@ -104,25 +96,18 @@ By defining the TRequest, we can filter which endpoints execute the pipeline beh
 
 ```csharp
 ( ... )
-.ConfigureServices((_, services) =>
-{
-    // Setting TRequest to be RequestQuery explicitly
-    services
-        .AddScoped(typeof(IPipelineBehaviorNoResponse<RequestQuery>), typeof(ExampleBehavior<RequestQuery>))
-});
+builder.Services
+    .AddScoped(typeof(IPipelineBehaviorNoResponse<RequestQuery>), typeof(ExampleBehavior<RequestQuery>))
+    .MapGet("/hybrid-endpoint", scope => async context =>
+    {
+        var dispatcher = scope.GetRequiredService<IRequestDispatcher<Http11Context>>();
+        // Sends for RequestQuery TRequest
+        await dispatcher.Send(new RequestQuery(), context.CancellationToken);
 
-( ... )
-
-.MapGet("/hybrid-endpoint", scope => async context =>
-{
-    var dispatcher = scope.GetRequiredService<IRequestDispatcher<Http11Context>>();
-    // Sends for RequestQuery TRequest
-    await dispatcher.Send(new RequestQuery(), context.CancellationToken);
-
-    context
-        .Respond()
-        .Status(ResponseStatus.Ok);
-})
+        context
+            .Respond()
+            .Status(ResponseStatus.Ok);
+    })
 ( ... )
 
 public class RequestHandlerExample : IRequestHandler<RequestQuery>

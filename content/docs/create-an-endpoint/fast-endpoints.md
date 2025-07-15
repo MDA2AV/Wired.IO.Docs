@@ -9,7 +9,7 @@ type: docs/
 
 
 ```csharp
-var builder = App.CreateBuilder(); // Create a default builder, assumes HTTP/1.1
+var builder = WiredApp.CreateBuilder(); // Create a default builder, assumes HTTP/1.1
 
 var app = builder
     .Port(5000) // Configured to http://localhost:5000
@@ -57,7 +57,7 @@ Write() is sync and accepts ReadOnlySpan<T>
 Alternatively, use the inbuilt handler's middleware to process the http response automatically.
 
 ```csharp
-var builder = App.CreateBuilder(); // Create a default builder, assumes HTTP/1.1
+var builder = WiredApp.CreateBuilder(); // Create a default builder, assumes HTTP/1.1
 
 var app = builder
     .Port(5000) // Configured to http://localhost:5000

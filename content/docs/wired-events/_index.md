@@ -32,14 +32,7 @@ public class ExampleWiredEventHandler(ILogger<ExampleWiredEventHandler> logger) 
 
 ( ... )
 // Register the IWiredEventHandler in the IoC container
-builder.App.HostBuilder
-    .ConfigureServices((_, services) =>
-    {
-        services
-            ( ... )
-            .AddWiredEventHandler<ExampleWiredEvent, ExampleWiredEventHandler>()
-            ( ... )
-    });
+builder.Services.AddWiredEventHandler<ExampleWiredEvent, ExampleWiredEventHandler>();
 ( ... )
 
 // Create wired events that will be handled by the middleware after the request is processed
@@ -105,14 +98,7 @@ public class Entity : IHasWiredEvents
 ```csharp
 ( ... )
 // Register the IWiredEventHandler in the IoC container
-builder.App.HostBuilder
-    .ConfigureServices((_, services) =>
-    {
-        services
-            ( ... )
-            .AddWiredEventHandler<ExampleWiredEvent, ExampleWiredEventHandler>()
-            ( ... )
-    });
+builder.Services.AddWiredEventHandler<ExampleWiredEvent, ExampleWiredEventHandler>();
 ( ... )
 ```
 

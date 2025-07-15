@@ -9,15 +9,11 @@ Wired.IO supports dependency injection across the entire framework.
 
 ### Registering a service
 
-Register @ Wired.IO internal IHostBuilder (HostBuilder)
+Register @ Wired.IO IServiceCollection
 
 ```csharp
 ( ... )
-builder.App.HostBuilder
-    .ConfigureServices((_, services) =>
-    {
-        services.AddScoped<DependencyService>()
-    });
+builder.Services.AddScoped<DependencyService>();
 ( ... )
 builder.Build(); // Builds IHostBuilder into IHost
 ( ... )
