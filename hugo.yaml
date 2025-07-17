@@ -1,5 +1,4 @@
 # Hugo configuration file
-baseURL: https://mda2av.github.io/Wired.IO.Docs
 title: Wired.IO
 
 # import hextra as module
@@ -45,7 +44,7 @@ params:
     logo:
       path: images/logo.png
       dark: images/logo.png
-      link: /
+      link: /Wired.IO.Docs/
       width: 50
       height: 50
 
