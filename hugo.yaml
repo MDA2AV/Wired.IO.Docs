@@ -1,4 +1,5 @@
 # Hugo configuration file
+baseURL: https://mda2av.github.io/Wired.IO.Docs
 title: Wired.IO
 
 # import hextra as module
