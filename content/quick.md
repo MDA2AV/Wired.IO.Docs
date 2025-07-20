@@ -8,7 +8,7 @@ This section contains quick basic examples to get you started, for advanced usag
 ## Include the Wired.IO package in your project.
 
 ```bash
-dotnet add package Wired.IO --version 9.0.0
+dotnet add package Wired.IO --version 9.1.0
 ```
 
 ## Wire up a basic endpoint
