@@ -1,5 +1,6 @@
 ---
-title: A. Static Resources
+title: Static Resources
+weight: 12
 type: docs
 sidebar:
   open: false

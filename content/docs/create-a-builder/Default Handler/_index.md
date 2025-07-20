@@ -1,5 +1,6 @@
 ---
-title: 1.1 Default Handler
+title: Default Handler
+weight: 1
 type: docs
 ---
 
@@ -17,6 +18,8 @@ By passing *UseResources: false*, *ResourcesPath* and *ResourcesAssembly* will n
 
 Check **Resource Hosting** section to learn more about these parameters.
 
+Learn more about [HandlerType]()
+
 ```csharp
 using Wired.IO.App;
 using Wired.IO.Protocol.Handlers;
@@ -26,13 +29,14 @@ var builderWithParameters = WiredApp.CreateBuilder(() =>
     new WiredHttp11<Http11Context>(new Http11HandlerArgs(
         UseResources: false,
         ResourcesPath: null!,
-        ResourcesAssembly: null!))
+        ResourcesAssembly: null!,
+        HandlerType: Http11HandlerType.Blocking))
 );
 ```
 
 #### Inject accepted SslApplicationProtocols
 
-For the default handler case, SslApplicationProtocol.Http11 will be considered by default, but that configuraiton can be overrided by injecting it in the CreateBuilder method.
+For the default handler case, SslApplicationProtocol.Http11 will be considered by default, but that configuration can be overriden by injecting it in the CreateBuilder method.
 
 ```csharp
 using Wired.IO.App;
@@ -53,6 +57,7 @@ var builder = WiredApp.CreateBuilder(() =>
     new WiredHttp11<Http11Context>(new Http11HandlerArgs(
         UseResources: false,
         ResourcesPath: null!,
-        ResourcesAssembly: null!)), [SslApplicationProtocol.Http11]
+        ResourcesAssembly: null!,
+        HandlerType: Http11HandlerType.Blocking)), [SslApplicationProtocol.Http11]
 );
 ```

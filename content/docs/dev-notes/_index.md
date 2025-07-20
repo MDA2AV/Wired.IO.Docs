@@ -1,11 +1,12 @@
 ---
-title: 0. Words from the Dev Team
+title: Introduction
+weight: 1
 type: docs
 sidebar:
   open: false
 ---
 
-Hello! In this documentation you can find instructions in how to use and take advantage of Wired.IO. In many of the code snipets you will find "( ... )" meaning usually some boiler plate is missing in the example, refer to previous sections when in doubt. The preferred order to create a Wired.IO webserver is create the builder, register builder services (@ builder.Services) and then builder configs such as fast endpoints, Tls, Port, Endpoint, etc, followed by .Build() and running or starting it, depending whether you want to block or not.
+In this documentation you can find instructions in how to use and take advantage of Wired.IO. In many of the code snipets you will find "( ... )" meaning usually some boiler plate is missing in the example, refer to previous sections when in doubt. The preferred order to create a Wired.IO webserver is create the builder, register builder services (@ builder.Services) and then builder configs such as fast endpoints, Tls, Port, Endpoint, etc, followed by .Build() and running or starting it, depending whether you want to block or not.
 
 Wired.IO webservers can be used in standalone or embedded with existing applications, when embedded with existing applications, you can integrating the existing IServiceCollectin and IServiceProvider in your Wired.IO webserver to share the same IoC container. See *Embedding with Existing Applications* section for more information.
 

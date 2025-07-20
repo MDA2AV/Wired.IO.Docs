@@ -1,5 +1,6 @@
 ---
-title: 2.1 Fast Endpoints
+title: Fast Endpoints
+weight: 1
 type: docs/
 ---
 

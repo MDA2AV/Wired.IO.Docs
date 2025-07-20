@@ -1,5 +1,6 @@
 ---
-title: 2. Create an Endpoint
+title: Create an Endpoint
+weight: 4
 type: docs
 sidebar:
   open: false

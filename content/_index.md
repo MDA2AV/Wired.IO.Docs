@@ -9,21 +9,33 @@ toc: false
   {{< card link="quick" title="Quick Start" icon="user" >}}
 {{< /cards >}}
 
-![My image description](neo.webp)
+# Welcome to Wired.IO
 
-**Wired.IO** is a lightweight, embeddable HTTP server for .NET — built as a minimal alternative to Kestrel. It runs on .NET 8+ and is ideal for low-overhead applications where performance, control, and customizability matter.
+**Wired.IO** is a lightweight, high-performance HTTP server framework for .NET. Designed from the ground up for **embedding**, **extensibility**, and **raw speed**, it gives you full control over your request pipeline without the weight of traditional web frameworks.
 
-Unlike traditional servers, Wired.IO is designed to be fully integrated into your application — no external processes, no hidden abstraction layers. It plugs directly into the .NET hosting model by implementing IHost, so you can run it alongside background services, workers, and other infrastructure using the standard dependency injection and lifecycle system.
+Whether you're building APIs, embedded servers, developer tools, or hybrid applications, Wired.IO provides a focused, zero-friction foundation that runs anywhere your .NET code does — no external hosting required.
 
-With Wired.IO, you can choose to use the built-in HTTP/1.1 server — or go deeper and define your own HTTP handler to support custom protocols, message parsing, or entirely different transport behavior. This flexibility makes it a perfect fit for both conventional APIs and deeply specialized applications.
+## Why Wired.IO?
 
-⚡ Whether you're building a high-throughput microservice, a device control interface, or integrating HTTP into a non-web app — Wired.IO gives you precise control with near-zero overhead.
+- ⚡ **Fast by default** – Built on `System.IO.Pipelines` and optimized for low allocations and high throughput.
+- 🧩 **Fully embeddable** – Add a production-ready HTTP server directly into your desktop, mobile, or console app.
+- 🧵 **Lean and composable** – Define only what you need: your context, your pipeline, your handlers.
+- 🔧 **Customizable by design** – TLS, routing, DI, and middleware are all open and easily replaceable.
+- 🌐 **Hybrid app ready** – Serve a full **web-based frontend** from inside your app. Pair your MAUI or desktop backend with a modern SPA or HTML/JS UI — all self-hosted.
+- 🪶 **No runtime magic** – Everything is explicit. No black boxes, no surprises.
 
 
+## Built for Embedding
 
-### When to choose Wired.IO
+Wired.IO was created to **run inside your app**, not alongside it. This means you can:
+- Run an HTTP interface inside a background service, tool, or MAUI app.
+- Use it for internal tooling, configuration UIs, simulators, or control panels.
+- Serve static files, WebSockets, or JSON APIs directly from your executable.
+- Create **hybrid apps** with native backends and web-based frontends, served over `localhost`.
 
-- When embedding your webserver in existing app such as .NET WPF, MAUI, Winforms, AvaloniaUI etc.
-- When you need lower level HTTP protocol control.
-- Great for small footprint background services.
-- Also ideal for low to medium sized backlog servers.
+## Wired.IO vs ASP.NET Core
+
+While ASP.NET Core is a full-featured, enterprise-grade web framework with extensive tooling, hosting, and middleware infrastructure, Wired.IO is designed for a different purpose: embedding a fast, minimal HTTP server directly into your .NET applications. ASP.NET Core excels in large-scale web applications with MVC, Razor Pages, SignalR, and sophisticated DI features. In contrast, Wired.IO is ideal for lightweight, self-contained workloads — such as background services, developer tools, device-local APIs, hybrid desktop apps, and custom network stacks. It prioritizes performance, composability, and explicit control over convention and abstraction, making it perfect for scenarios where ASP.NET Core is too heavy or invasive.
+
+
+Whether you're building a lightweight HTTP API, embedding a control panel, or serving a web frontend inside your desktop app, **Wired.IO** gives you the control and performance to do it right — with zero friction.

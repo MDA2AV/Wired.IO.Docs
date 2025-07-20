@@ -1,5 +1,6 @@
 ---
-title: 4.2 Mediator Endpoints
+title: Mediator Endpoints
+weight: 2
 type: docs
 sidebar:
   open: false

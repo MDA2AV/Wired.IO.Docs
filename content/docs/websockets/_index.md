@@ -1,5 +1,6 @@
 ---
-title: 7. Websockets
+title: Websockets
+weight: 9
 type: docs
 sidebar:
   open: false

@@ -1,5 +1,6 @@
 ---
-title: B. Custom Response Content
+title: Custom Response Content
+weight: 13
 type: docs
 sidebar:
   open: false

@@ -1,5 +1,6 @@
 ---
-title: 2.2 Mediator
+title: Mediator
+weight: 2
 type: docs
 sidebar:
   open: false

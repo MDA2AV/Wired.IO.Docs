@@ -1,5 +1,6 @@
 ---
-title: 6. Logging
+title: Logging
+weight: 8
 type: docs
 sidebar:
   open: false

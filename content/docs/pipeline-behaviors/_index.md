@@ -1,5 +1,6 @@
 ---
-title: 4. Pipeline Behaviors
+title: Pipeline Behaviors
+weight: 6
 type: docs
 sidebar:
   open: false

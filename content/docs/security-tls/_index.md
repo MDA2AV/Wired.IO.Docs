@@ -1,5 +1,6 @@
 ---
-title: 8. Security (TLS)
+title: Security (TLS)
+weight: 10
 type: docs
 sidebar:
   open: false

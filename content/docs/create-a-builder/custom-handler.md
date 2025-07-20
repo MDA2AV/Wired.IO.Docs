@@ -1,5 +1,6 @@
 ---
-title: 1.2 Custom Handler
+title: Custom Handler
+weight: 2
 type: docs
 ---
 

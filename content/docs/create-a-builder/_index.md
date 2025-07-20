@@ -1,5 +1,6 @@
 ---
-title: 1. Create a Builder
+title: Create a Builder
+weight: 3
 type: docs
 sidebar:
   open: false

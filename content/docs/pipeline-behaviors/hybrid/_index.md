@@ -1,5 +1,6 @@
 ---
-title: 4.1 Hybrid Endpoints
+title: Hybrid Endpoints
+weight: 1
 type: docs
 sidebar:
   open: false

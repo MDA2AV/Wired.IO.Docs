@@ -44,7 +44,7 @@ params:
     logo:
       path: images/logo.png
       dark: images/logo.png
-      link: /Wired.IO.Docs/
+      link: https://mda2av.github.io/Wired.IO.Docs/
       width: 50
       height: 50
 

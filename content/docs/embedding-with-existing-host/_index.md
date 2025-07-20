@@ -1,5 +1,6 @@
 ---
-title: C. Embedding with Existing Applications
+title: Embedding with Existing Applications
+weight: 14
 type: docs
 sidebar:
   open: false

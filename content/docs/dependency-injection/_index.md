@@ -1,5 +1,6 @@
 ---
-title: 5. Dependency Injection
+title: Dependency Injection
+weight: 7
 type: docs
 sidebar:
   open: false

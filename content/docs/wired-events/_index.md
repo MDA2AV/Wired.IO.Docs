@@ -1,5 +1,6 @@
 ---
-title: 9. Wired Events
+weight: 11
+title: Wired Events
 type: docs
 sidebar:
   open: false

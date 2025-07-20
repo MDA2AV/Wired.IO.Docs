@@ -1,5 +1,6 @@
 ---
-title: 3. Adding Middleware
+title: Adding Middleware
+weight: 5
 type: docs
 sidebar:
   open: false
