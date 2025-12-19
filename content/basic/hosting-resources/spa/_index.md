@@ -1,0 +1,28 @@
+---
+title: Single Page Application
+---
+
+In this example we host a SPA (embedded resources) placed inside the Docs folder.
+
+Adapt your Location object to configure the resource origin.
+
+```csharp
+using System.Reflection;
+using Wired.IO.App;
+using Wired.IO.Http11Express.StaticHandlers;
+
+var builder = WiredApp
+    .CreateExpressBuilder()
+    .Port(8080)
+    .AddSpaProvider("/*",
+        new Location
+        {
+            Assembly = Assembly.GetExecutingAssembly(),
+            LocationType = LocationType.EmbeddedResource,
+            Path = "Docs"
+        }, []);
+    
+await builder
+    .Build()
+    .RunAsync();
+```
