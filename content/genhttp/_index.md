@@ -2,7 +2,7 @@
 title: GenHTTP
 ---
 
-[GenHTTP](https://genhttp.org/) is a batteries included API focused webserver framework which provides a very wide out of the box funcitonality.
+[GenHTTP](https://genhttp.org/) is a batteries included API focused webserver framework which provides a very wide out of the box functionality.
 
 Using the [Wired-GenHTTP Adapter](https://github.com/Kaliumhexacyanoferrat/wired-genhttp-adapter) allows to combine the flexibility and performance of Wired.IO with the high-level APIs provided by the GenHTTP framework.
 
