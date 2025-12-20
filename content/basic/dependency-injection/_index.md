@@ -1,5 +1,6 @@
 ---
 title: Dependency Injection
+weight: 2
 ---
 
 Wired provides first class support for dependency injection through IServiceCollection and IServiceProvider, just like ASP.NET Core.
@@ -14,8 +15,10 @@ using Wired.IO.App;
 
 var builder = WiredApp
     .CreateExpressBuilder()
-    .Port(8080)
-    .UseRootEndpoints()
+    .Port(8080);
+
+builder
+    .MapGroup("/")
     .MapGet("/my-endpoint", async context =>
     {
         var service = context.Services.GetRequiredService<ServiceExample>();

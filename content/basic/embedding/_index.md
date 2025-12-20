@@ -16,7 +16,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Extensions.Logging;
 using Wired.IO.App;
 using Wired.IO.Protocol.Response;
-using StringContent = Wired.IO.Http11.Response.Content.StringContent;
 
 namespace EmbeddedWired;
 

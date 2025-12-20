@@ -18,9 +18,18 @@ markup:
 
 menu:
   main:
-    - name: Docs
-      pageRef: /docs
+    - name: Basic
+      pageRef: /basic
       weight: 1
+    - name: Advanced
+      pageRef: /advanced
+      weight: 2
+    - name: Performance
+      pageRef: /performance
+      weight: 4
+    - name: GenHTTP
+      pageRef: /genhttp
+      weight: 3
     - name: Discord
       weight: 5
       url: "https://discord.gg/psxPcgZBF6"

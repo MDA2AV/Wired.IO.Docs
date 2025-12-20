@@ -1,0 +1,37 @@
+---
+title: GenHTTP
+---
+
+[GenHTTP](https://genhttp.org/) is a batteries included API focused webserver framework which provides a very wide out of the box funcitonality.
+
+Using the [Wired-GenHTTP Adapter](https://github.com/Kaliumhexacyanoferrat/wired-genhttp-adapter) allows to combine the flexibility and performance of Wired.IO with the high-level APIs provided by the GenHTTP framework.
+
+```csharp
+using GenHTTP.Adapters.WiredIO;
+
+using GenHTTP.Modules.ApiBrowsing;
+using GenHTTP.Modules.Functional;
+using GenHTTP.Modules.Layouting;
+using GenHTTP.Modules.OpenApi;
+
+using Wired.IO.App;
+
+// GET http://localhost:5000/api/redoc/
+
+var api = Inline.Create()
+                .Get("hello", (string a) => $"Hello {a}!");
+
+var layout = Layout.Create()
+                   .Add(api)
+                   .AddOpenApi()
+                   .AddRedoc()
+                   .Defaults(); // adds compression, eTag handling, ...
+
+var builder = WiredApp.CreateExpressBuilder()
+                      .Port(5000)
+                      .MapGenHttp("/api/*", layout);
+
+var app = builder.Build();
+
+await app.RunAsync();
+```

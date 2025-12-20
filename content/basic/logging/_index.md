@@ -1,5 +1,6 @@
 ---
 title: Logging
+weight: 4
 ---
 
 Wired.IO implements ILoggingFactory with its default parameters

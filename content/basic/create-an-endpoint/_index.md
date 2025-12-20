@@ -1,5 +1,6 @@
 ---
-title: Create an endpoint
+title: Create an Endpoint
+weight: 1
 ---
 
 Wire up a basic Wired webserver with a GET endpoint.

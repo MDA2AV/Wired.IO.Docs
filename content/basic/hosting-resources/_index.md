@@ -1,5 +1,6 @@
 ---
 title: Hosting Resources
+weight: 5
 ---
 
 This section explores basic examples on how to host:

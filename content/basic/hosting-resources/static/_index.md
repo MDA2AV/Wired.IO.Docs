@@ -13,7 +13,7 @@ using System.Reflection;
 using Wired.IO.App;
 using Wired.IO.Http11Express.StaticHandlers;
 
-var builder = WiredApp
+await WiredApp
     .CreateExpressBuilder()
     .Port(8080)
     .AddStaticResourceProvider("/resources/*",
@@ -22,9 +22,7 @@ var builder = WiredApp
             Assembly = Assembly.GetExecutingAssembly(),
             LocationType = LocationType.EmbeddedResource,
             Path = "Docs"
-        }, []);
-    
-await builder
+        }, []) // Pass middleware collection here
     .Build()
     .RunAsync();
 ```
