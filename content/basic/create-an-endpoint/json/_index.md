@@ -20,7 +20,7 @@ builder
             .Respond()
             .Status(ResponseStatus.Ok)
             .Type("application/json"u8)
-            .Content(new ExpressJsonObjectContent(new { Message = "My endpoint!" }));
+            .Content(new ExpressJsonContent(new { Message = "My endpoint!" }));
     });
     
 await builder
